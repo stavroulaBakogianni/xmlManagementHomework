@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="22.0.1" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="gr.codehub.eshoped.xmlmodeling.model.Person">
+    <void property="age">
+     <int>20</int>
+    </void>
+    <void property="mainAddress">
+     <object class="gr.codehub.eshoped.xmlmodeling.model.Address"/>
+    </void>
+    <void property="name">
+     <string>Dimitris</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
