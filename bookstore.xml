@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bk:catalog xmlns:bk="http://example.com/book" 
+         xmlns:auth="http://example.com/author"
+        xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://example.com/book  bookstore.xsd"
+>
+  <bk:book>
+    <bk:title>XML Basics</bk:title>
+    <bk:price>39.95</bk:price>
+    <auth:author>
+      <auth:name>John Doe</auth:name>
+      <auth:birthdate>1970-01-01</auth:birthdate>
+    </auth:author>
+  </bk:book>
+  <bk:book>
+    <bk:title>Advanced XML</bk:title>
+    <bk:price>49.95</bk:price>
+    <auth:author>
+      <auth:name>Jane Smith</auth:name>
+      <auth:birthdate>1980-02-02</auth:birthdate>
+    </auth:author>
+  </bk:book>
+</bk:catalog>

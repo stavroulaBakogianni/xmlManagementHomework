@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:auth="http://example.com/author"
+           targetNamespace="http://example.com/author"
+           elementFormDefault="qualified">
+
+  <!-- Define the author element -->
+  <xs:element name="author">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="birthdate" type="xs:date"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
