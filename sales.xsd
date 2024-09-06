@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XmlSchema.xsd to edit this template
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://europeandynamics.com/sales"  
+           xmlns="http://europeandynamics.com/sales"  
+           elementFormDefault="qualified">
+
+    
+    <xs:element name="sales">
+        <xs:complexType>
+         <xs:sequence>
+             <xs:element ref="order" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="order">
+        <xs:complexType>
+         <xs:sequence>
+             <xs:element ref="customer"  />
+             <xs:element ref="products" />
+             <xs:element ref="payment" />
+         </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="customer">
+        <xs:complexType>
+         <xs:sequence>
+             <xs:element name="name" type="xs:string" />
+             <xs:element name="address" type="xs:string"/>
+         </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="products">
+        <xs:complexType>
+         <xs:sequence>
+             <xs:element ref="product" minOccurs="0" maxOccurs="unbounded"/>
+         </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="payment"  >
+        <xs:complexType>
+      <xs:sequence/>
+        </xs:complexType>
+  </xs:element>
+ 
+    
+    <xs:element name="product">
+        <xs:complexType>
+         <xs:sequence>
+              <xs:choice minOccurs="0" maxOccurs="unbounded"> <!--  permits rearrangement and omission -->
+             <xs:element name="id"  type="xs:string" />
+             <xs:element name="name"  type="xs:string"/>
+             <xs:element name="price"  type="xs:string"/>
+              </xs:choice>
+         </xs:sequence>
+         <xs:attribute name="shelf" type="xs:string"/>
+         <xs:attribute name="quantity" type="xs:string"/>
+         <xs:attribute name="availability" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    
+    
+    
+    
+    
+    
+</xs:schema>

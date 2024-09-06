@@ -14,23 +14,34 @@
         </xs:complexType>         
   </xs:element>
     
- 
-       
+        
   <xs:element name="person">
         <xs:complexType>
          <xs:sequence>
+          <xs:choice minOccurs="0" maxOccurs="unbounded"> <!--  permits rearrangement and omission -->
          <xs:element ref = "name"     />
          <xs:element ref = "age"    />
          <xs:element ref = "address"     /> 
+          </xs:choice>
       </xs:sequence>     
         </xs:complexType>
     </xs:element>   
     
     <xs:element name = "name"   type = "xs:string"  />
     <xs:element name = "age"  type = "xs:int"  />
-    <xs:element name = "address"   type = "xs:string"  /> 
     
     
+    <xs:complexType   name="addressType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <!-- Define attributes for the element -->
+        <xs:attribute name="country" type="xs:string"/>
+        <xs:attribute name="zip" type="xs:int"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+    
+  <xs:element name="address" type= "addressType"/> 
    
 
 </xs:schema>

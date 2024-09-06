@@ -5,15 +5,17 @@
         xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://europeandynamics.com/person  person.xsd">
     <person>
-        <name>Helen</name>
-        <age>20</age>
-        <address>Athens</address>
+        
+     
+     <name>Helen</name>
+   
+        <address   country="Greece"  zip="11526">Athens</address>
     </person>
     
     <person>
         <name>Helen</name>
         <age>20</age>
-        <address>Athens</address>
+        <address     country="Greece" >Athens</address>
     </person>
     
     <person>
