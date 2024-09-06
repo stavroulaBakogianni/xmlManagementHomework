@@ -13,7 +13,7 @@ import lombok.Data;
  */
 
 @Data
-public class Address implements Serializable{
+public class Address  {
     private String street;
     private String number;
     private String city;

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+    TODO define vocabulary identification
+    PUBLIC ID: -//vendor//vocabulary//EN
+    SYSTEM ID: http://server/path/persons.dtd
+
+-->
+
+<!--
+    An example how to use this DTD from your XML document:
+
+    <?xml version="1.0"?>
+
+    <!DOCTYPE java SYSTEM "persons.dtd">
+
+    <java>
+    ...
+    </java>
+-->
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT java (object)*>
+<!ATTLIST java
+    version CDATA #IMPLIED
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT object (void)*>
+<!ATTLIST object
+    class CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT void (object|int|string)*>
+<!ATTLIST void
+    method CDATA #IMPLIED
+    property CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT int (#PCDATA)>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT string (#PCDATA)>

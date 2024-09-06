@@ -13,7 +13,7 @@ import lombok.Data;
  * @author DimitrisIracleous
  */
 @Data
-public class Person implements Serializable{
+public class Person  {
     private String name;
     private int age;
     private String doc;
