@@ -5,7 +5,7 @@
    <object class="gr.codehub.eshoped.xmlmodeling.model.Person">
     <void property="age">
      <int>20</int>
-   </void> 
+    </void>
     <void property="mainAddress">
      <object class="gr.codehub.eshoped.xmlmodeling.model.Address"/>
     </void>
