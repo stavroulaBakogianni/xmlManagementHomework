@@ -6,6 +6,7 @@ package gr.codehub.eshoped.xmlmodeling;
 
 import gr.codehub.eshoped.xmlmodeling.model.Address;
 import gr.codehub.eshoped.xmlmodeling.model.Person;
+import gr.codehub.eshoped.xmlmodeling.xmlservice.JaxbXsdGenerator;
 import gr.codehub.eshoped.xmlmodeling.xmlservice.XmlManagement;
 import gr.codehub.eshoped.xmlmodeling.xmlservice.XmlManagementImpl;
 import java.beans.XMLDecoder;
@@ -26,7 +27,13 @@ import java.util.List;
 public class XmlModelingMain {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("Hello World!");
+     
+        JaxbXsdGenerator.xsdGenerator();
+    }
+    
+    
+    public static void decoding(){
+           System.out.println("Hello World!");
         
         List<Person> persons = new ArrayList<>();
         
@@ -65,6 +72,5 @@ public class XmlModelingMain {
 	}
         
         System.out.println(readlist);
-        
     }
 }
