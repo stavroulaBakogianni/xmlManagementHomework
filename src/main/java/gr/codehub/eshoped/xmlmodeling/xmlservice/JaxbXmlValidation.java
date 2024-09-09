@@ -19,13 +19,21 @@ import org.xml.sax.SAXException;
  * @author DimitrisIracleous
  */
 public class JaxbXmlValidation {
+
     public static void main(String[] args) {
-        xmlValidator("person-2.xml" ,  "person-schema.xsd");
+
+        // Call xmlValidator and save the result
+        boolean xmlValidationResult = xmlValidator("xml/person-2.xml", "xml/person-schema.xsd");
+
+        // Check the result and print the relavant message
+        if (xmlValidationResult) {
+            System.out.println("XML is valid.");
+        } else {
+            System.out.println("XML is invalid.");
+        }
     }
-   
- // 
-    
-    public static void xmlValidator(String xmlFileName, String xsdFileame) {
+
+    public static boolean xmlValidator(String xmlFileName, String xsdFileame) {
         try {
             // Create JAXB context for the Person class
             JAXBContext jaxbContext = JAXBContext.newInstance(Person.class);
@@ -35,7 +43,7 @@ public class JaxbXmlValidation {
 
             // Create SchemaFactory for loading the XSD
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            
+
             // Load the XSD file (ensure the correct path to the XSD file)
             Schema schema = schemaFactory.newSchema(new File(xsdFileame));
 
@@ -46,15 +54,13 @@ public class JaxbXmlValidation {
             File xmlFile = new File(xmlFileName);
             Person person = (Person) unmarshaller.unmarshal(xmlFile);
 
-            // If the XML is valid, the following line will be executed
-            System.out.println("XML is valid. Unmarshalled object: " + person);
+            // XML is valid
+            return true;
 
         } catch (JAXBException | SAXException e) {
-            // This block will catch validation errors
-            System.err.println("Validation failed: " + e.getMessage());
+
+            // XML is invalid
+            return false;
         }
     }
-    
-    
-    
 }
