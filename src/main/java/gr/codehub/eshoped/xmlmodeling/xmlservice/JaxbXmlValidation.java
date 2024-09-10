@@ -12,49 +12,53 @@ import java.io.File;
 import javax.xml.XMLConstants;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.xml.sax.SAXException;
 
 /**
  *
  * @author DimitrisIracleous
  */
+@Slf4j
 public class JaxbXmlValidation {
     public static void main(String[] args) {
-        xmlValidator("person-2.xml" ,  "person-schema.xsd");
+     boolean validity = xmlValidator("xml/person-2.xml" ,  "xml/person-schema.xsd");
+     
+     if (validity)
+            System.out.println("The file is valid");
+     else
+            System.out.println("Yhe file is not valid");
+     
+     
     }
    
  // 
-    
-    public static void xmlValidator(String xmlFileName, String xsdFileame) {
+  /**
+   * Create JAXB context for the Person class, Create Unmarshaller
+   * Create SchemaFactory for loading the XSD, Load the XSD file (ensure the correct path to the XSD file)
+   * Set schema to the unmarshaller (for validation)
+   * Validate and Unmarshal XML to a Person object
+   * @param xmlFileName
+   * @param xsdFileame
+   * @return 
+   */  
+    public static boolean xmlValidator(String xmlFileName, String xsdFileame) {
+        log.debug("method starts");
+        boolean returnStatus = false;
         try {
-            // Create JAXB context for the Person class
             JAXBContext jaxbContext = JAXBContext.newInstance(Person.class);
-
-            // Create Unmarshaller
             Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-
-            // Create SchemaFactory for loading the XSD
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            
-            // Load the XSD file (ensure the correct path to the XSD file)
             Schema schema = schemaFactory.newSchema(new File(xsdFileame));
-
-            // Set schema to the unmarshaller (for validation)
             unmarshaller.setSchema(schema);
-
-            // Validate and Unmarshal XML to a Person object
             File xmlFile = new File(xmlFileName);
             Person person = (Person) unmarshaller.unmarshal(xmlFile);
-
-            // If the XML is valid, the following line will be executed
-            System.out.println("XML is valid. Unmarshalled object: " + person);
-
-        } catch (JAXBException | SAXException e) {
-            // This block will catch validation errors
-            System.err.println("Validation failed: " + e.getMessage());
-        }
+            log.debug("xml validated ",person);
+            returnStatus = true;
+       } catch (JAXBException | SAXException e) {
+           log.debug("not valid xml");
+        } 
+         log.debug("method terminates");
+         return returnStatus;
     }
-    
-    
-    
 }

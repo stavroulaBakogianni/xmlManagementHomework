@@ -6,6 +6,7 @@ package gr.codehub.eshoped.xmlmodeling;
 
 import gr.codehub.eshoped.xmlmodeling.model.Address;
 import gr.codehub.eshoped.xmlmodeling.model.Person;
+import gr.codehub.eshoped.xmlmodeling.xmlservice.JaxbXmlValidation;
 import gr.codehub.eshoped.xmlmodeling.xmlservice.JaxbXsdGenerator;
 import gr.codehub.eshoped.xmlmodeling.xmlservice.XmlManagement;
 import gr.codehub.eshoped.xmlmodeling.xmlservice.XmlManagementImpl;
@@ -27,8 +28,8 @@ import java.util.List;
 public class XmlModelingMain {
 
     public static void main(String[] args) throws IOException {
-     
-        JaxbXsdGenerator.xsdGenerator();
+        System.out.println("starting");
+        JaxbXmlValidation.main(args);
     }
     
     
