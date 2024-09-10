@@ -30,6 +30,9 @@ public class ObjectToXMLConverter {
     public static void main(String[] args) throws Exception {
         Employee employee = new Employee();
         Department department = new Department();
+        employee.setName("Ap");
+ 
+        
         String xmlString = convertObjectToXML(employee);
         System.out.println(xmlString);
     }
