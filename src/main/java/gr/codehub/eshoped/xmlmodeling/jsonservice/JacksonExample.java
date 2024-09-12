@@ -11,24 +11,36 @@ package gr.codehub.eshoped.xmlmodeling.jsonservice;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import gr.codehub.eshoped.xmlmodeling.domain.Person;
-import gr.codehub.eshoped.xmlmodeling.domain.User;
-import gr.codehub.eshoped.xmlmodeling.model.Human;
+import gr.codehub.eshoped.xmlmodeling.model.Department;
+import gr.codehub.eshoped.xmlmodeling.model.Employee;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JacksonExample {
 
     public static void main(String[] args) {
         
-//        String jsonFilename = "json/user.json";
-//        User user = new User(); 
-//        
-//        writeExample(jsonFilename, user);
+        String jsonFilename = "json/department.json";
+        Department department = new Department();
+        department.setId(10);
+        department.setName("Sales");
+        Employee employee = new Employee();
+        department.setEmployees(new ArrayList<>());
+        department.getEmployees().add(employee);
+        employee.setId(7);
+        employee.setFullName("George");
+        employee.setDepartmentName(department);
         
-        Human human = readExample("json/human.json", Human.class);
-         System.out.println(human.getAddress());
+        
+        writeExample(jsonFilename, department);
+   
+        
+   //     Human human = readExample("json/human.json", Human.class);
+    //     System.out.println(human.getAddress());
     }
     
     //serialization   marsalling
