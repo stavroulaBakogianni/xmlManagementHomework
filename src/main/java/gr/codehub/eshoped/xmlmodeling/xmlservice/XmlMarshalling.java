@@ -5,12 +5,21 @@
 package gr.codehub.eshoped.xmlmodeling.xmlservice;
 
 import gr.codehub.eshoped.xmlmodeling.domain.Person;
+import gr.codehub.eshoped.xmlmodeling.model.Department;
+import gr.codehub.eshoped.xmlmodeling.model.Employee;
+import gr.codehub.eshoped.xmlmodeling.model.Human;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -61,10 +70,74 @@ public class XmlMarshalling {
         System.out.println(person);
     }
     
+    /**
+     * UnMarshalling ( XMLfile to Object )
+     *         // Create JAXB Context
+     * // Create Unmarshaller
+     *         // Unmarshal the XML back into an object
+     * @param <T>
+     * @param xmlFilename
+     * @param classtype
+     * @return
+     * @throws JAXBException
+     * @throws FileNotFoundException 
+     */
+
+    public static <T extends Object> T unMarshallingFromFile(String xmlFilename, Class<T> classtype) {
+        JAXBContext jaxbContext;
+        try {
+            jaxbContext = JAXBContext.newInstance(classtype); 
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            FileInputStream reader = new FileInputStream(new File(xmlFilename));
+            T t = (T) unmarshaller.unmarshal(reader);
+        return t;
+        } catch (JAXBException ex) {
+            Logger.getLogger(XmlMarshalling.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(XmlMarshalling.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return null;
+    }
+    
+    /**
+     *  // Marshalling (Object to XML)
+     *   // Create Marshaller
+     * // To make the XML output pretty
+     * @param <T>
+     * @param xmlFilename
+     * @param object
+     * @throws JAXBException 
+     */
+  
+    public static  <T extends Object>  void marshallingToFile(String xmlFilename
+            , T object) throws JAXBException {
+        JAXBContext jaxbContext = JAXBContext.newInstance(object.getClass());
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+        File sw = new File(xmlFilename);
+        marshaller.marshal(object, sw);
+}  
+    
     
     public static void main(String[] args) throws JAXBException {
-         marshalling();
-unMarshalling();
+        //marshalling();
+        //unMarshalling();
+        
+//        Human human = unMarshallingFromFile("xml/human.xml", Human.class);
+//        System.out.println("" + human.getAddress());
+
+        Department department = new Department();
+        department.setId(10);
+        department.setName("Sales");
+        Employee employee = new Employee();
+        department.setEmployees(new ArrayList<>());
+        department.getEmployees().add(employee);
+        employee.setId(7);
+        employee.setFullName("George");
+      //  employee.setDepartmentName(department);
+
+        marshallingToFile("xml/department.xml", department);
+
     }
     
 }

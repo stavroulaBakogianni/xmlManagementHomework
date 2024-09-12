@@ -30,7 +30,7 @@ public class ObjectToXMLConverter {
     public static void main(String[] args) throws Exception {
         Employee employee = new Employee();
         Department department = new Department();
-        employee.setName("Ap");
+        employee.setFullName("Ap");
  
         
         String xmlString = convertObjectToXML(employee);
@@ -53,7 +53,7 @@ public class ObjectToXMLConverter {
 
         // Create child elements and append them to the root
         Element firstName = document.createElement("firstName");
-        firstName.appendChild(document.createTextNode(person.getName()));
+        firstName.appendChild(document.createTextNode(person.getFullName()));
         root.appendChild(firstName);
 
         

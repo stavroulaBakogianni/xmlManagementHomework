@@ -8,6 +8,7 @@ package gr.codehub.eshoped.xmlmodeling.jsonservice;
  *
  * @author DimitrisIracleous
  */
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.networknt.schema.JsonSchema;
 import com.networknt.schema.JsonSchemaFactory;
 import com.networknt.schema.SpecVersion;
@@ -17,9 +18,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Set;
 
 public class JsonSchemaValidatorExample {
@@ -47,7 +50,8 @@ public class JsonSchemaValidatorExample {
             
             
             // Load JSON Schema from resource
-        //    InputStream schemaStream = JsonSchemaValidatorExample.class.getResourceAsStream("/human-schema.json");
+         //   InputStream schemaStream = JsonSchemaValidatorExample.class.getResourceAsStream("/human-schema.json");
+         
                 InputStream schemaStream = new FileInputStream(new File("json/human-schema.json"));
             // Create a JsonSchemaFactory with the correct schema version (Draft-07)
             JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersion.VersionFlag.V7);
@@ -66,6 +70,11 @@ public class JsonSchemaValidatorExample {
             ObjectMapper mapper = new ObjectMapper();
             JsonNode jsonNode = mapper.readTree(jsonData);
 
+         Iterator<JsonNode> iterator = jsonNode.elements();
+         while(iterator.hasNext()){
+             System.out.println(iterator.next().asText());
+         }
+            
             // Validate the JSON data against the schema
             Set<ValidationMessage> validationResult = schema.validate(jsonNode);
 
@@ -76,7 +85,7 @@ public class JsonSchemaValidatorExample {
                 System.out.println("JSON validation failed!");
                 validationResult.forEach(vm -> System.out.println(vm.getMessage()));
             }
-        } catch (Exception e) {
+        } catch (JsonProcessingException | FileNotFoundException e) {
             System.out.println("Error during validation: " + e.getMessage());
         }
     }
