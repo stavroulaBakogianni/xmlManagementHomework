@@ -5,12 +5,18 @@
 package gr.codehub.eshoped.xmlmodeling.xmlservice;
 
 import gr.codehub.eshoped.xmlmodeling.domain.Person;
+import gr.codehub.eshoped.xmlmodeling.model.Human;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -61,10 +67,43 @@ public class XmlMarshalling {
         System.out.println(person);
     }
     
+    /**
+     * UnMarshalling ( XMLfile to Object )
+     *         // Create JAXB Context
+     * // Create Unmarshaller
+     *         // Unmarshal the XML back into an object
+     * @param <T>
+     * @param xmlFilename
+     * @param classtype
+     * @return
+     * @throws JAXBException
+     * @throws FileNotFoundException 
+     */
+
+    public static <T extends Object> T unMarshallingFromFile(String xmlFilename, Class<T> classtype) {
+        JAXBContext jaxbContext;
+        try {
+            jaxbContext = JAXBContext.newInstance(classtype); 
+            Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+            FileInputStream reader = new FileInputStream(new File(xmlFilename));
+            T t = (T) unmarshaller.unmarshal(reader);
+        return t;
+        } catch (JAXBException ex) {
+            Logger.getLogger(XmlMarshalling.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(XmlMarshalling.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return null;
+    }
+    
+    
+    
     
     public static void main(String[] args) throws JAXBException {
-         marshalling();
-unMarshalling();
+        //marshalling();
+        //unMarshalling();
+        Human human = unMarshallingFromFile("xml/human.xml", Human.class);
+        System.out.println("" + human.getAddress());
     }
     
 }

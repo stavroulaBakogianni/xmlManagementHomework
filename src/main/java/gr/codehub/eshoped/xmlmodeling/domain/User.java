@@ -9,43 +9,18 @@ package gr.codehub.eshoped.xmlmodeling.domain;
  * @author DimitrisIracleous
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
+    @JsonProperty("user_id")
     private int id;
+    @JsonProperty("full_name")
     private String name;
     private String email;
-
-    public User(int id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
-
-    @JsonProperty("user_id")
-    public int getId() {
-        return id;
-    }
-
-    @JsonProperty("user_id")
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @JsonProperty("full_name")
-    public String getName() {
-        return name;
-    }
-
-    @JsonProperty("full_name")
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
